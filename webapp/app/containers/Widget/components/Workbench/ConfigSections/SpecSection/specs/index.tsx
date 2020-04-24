@@ -12,7 +12,7 @@ export const FunnelSection = loadable(() => import('./Funnel'), { fallback })
 
 export const MapSection = loadable(() => import('./Map'), { fallback })
 
-export const BmapSection = loadable(() => import('./bmap'), { fallback })
+export const BmapSection = loadable(() => import('./Bmap'), { fallback })
 
 export const ParallelSection = loadable(() => import('./Parallel'), { fallback })
 
