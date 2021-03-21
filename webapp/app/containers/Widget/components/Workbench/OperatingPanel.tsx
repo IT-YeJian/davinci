@@ -30,6 +30,7 @@ import DoubleYAxisSection, { IDoubleYAxisConfig } from './ConfigSections/DoubleY
 import AreaSelectSection, { IAreaSelectConfig } from './ConfigSections/AreaSelectSection'
 import ScorecardSection, { IScorecardConfig } from './ConfigSections/ScorecardSection'
 import IframeSection, { IframeConfig } from './ConfigSections/IframeSection'
+import SeasSection, { ISeasConfig } from './ConfigSections/SeasSection/SeasSection'
 import TableSection from './ConfigSections/TableSection'
 import GaugeSection from './ConfigSections/GaugeSection'
 import { ITableConfig } from '../Config/Table'
@@ -1546,8 +1547,8 @@ export class OperatingPanel extends React.Component<IOperatingPanelProps, IOpera
     const [dimetionsCount, metricsCount] = this.getDimetionsAndMetricsCount()
     const {
       spec, xAxis, yAxis, axis, splitLine, pivot: pivotConfig, label, legend,
-      visualMap, toolbox, areaSelect, scorecard, gauge, iframe, table, bar, radar, doubleYAxis } = styleParams
-
+      visualMap, toolbox, areaSelect, scorecard, gauge, iframe, table, seas, bar, radar, doubleYAxis } = styleParams
+    
     let categoryDragItems = this.state.categoryDragItems
     if (mode === 'pivot'
       && valueDragItems.length
@@ -1755,6 +1756,11 @@ export class OperatingPanel extends React.Component<IOperatingPanelProps, IOpera
               title="内嵌网页"
               config={iframe}
               onChange={this.styleChange('iframe')}
+            />}
+            {seas && <SeasSection
+              title="海洋"
+              config={seas}
+              onChange={this.styleChange('seas')}
             />}
             {table && <TableSection
               dataParams={dataParams}

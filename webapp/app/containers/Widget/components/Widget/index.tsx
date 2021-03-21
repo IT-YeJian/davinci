@@ -36,6 +36,7 @@ import { createStructuredSelector } from 'reselect'
 import { makeSelectCurrentProject } from 'containers/Projects/selectors'
 import { connect } from 'react-redux'
 import { IProject } from 'containers/Projects/types'
+import { ISeasConfig } from '../Workbench/ConfigSections/SeasSection/SeasSection'
 const styles = require('../Pivot/Pivot.less')
 
 const mapStateToProps = createStructuredSelector({
@@ -103,6 +104,7 @@ export interface IChartStyles {
   gauge?: IGaugeConfig
   iframe?: IframeConfig
   table?: ITableConfig
+  seas?: ISeasConfig
   richText?: IRichTextConfig
   bar?: IBarConfig
   radar?: IRadarConfig

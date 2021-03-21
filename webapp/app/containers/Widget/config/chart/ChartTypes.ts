@@ -97,7 +97,11 @@ export enum ChartTypes {
   /**
    *  百度地图
    */
-  BMap = 18
+  BMap = 18,
+  /**
+   *  海洋
+   */
+  Seas = 19
 }
 
 export default ChartTypes

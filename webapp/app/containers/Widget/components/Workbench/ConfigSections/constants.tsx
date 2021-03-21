@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from 'antd'
 const Option = Select.Option
-import { PIVOT_CHART_FONT_FAMILIES, PIVOT_CHART_FONT_SIZES, CHART_SORT_MODES, CHART_ALIGNMENT_MODES, CHART_LAYER_TYPES, CHART_LINES_SYMBOL_TYPE, CHART_BMAP_SCALE, CHART_BMAP_THEMETYPE, CHART_BMAP_EFFECTTYPE, CHART_MAPINFO } from 'app/globalConstants'
+import { PIVOT_CHART_FONT_FAMILIES, PIVOT_CHART_FONT_SIZES, CHART_SORT_MODES, CHART_ALIGNMENT_MODES, CHART_LAYER_TYPES, CHART_LINES_SYMBOL_TYPE, CHART_BMAP_SCALE, CHART_BMAP_THEMETYPE, CHART_BMAP_EFFECTTYPE, CHART_MAPINFO, SEAS_THEME, SEAS_SPEED_TYPE } from 'app/globalConstants'
 
 export const chartFontFamilyOptions = PIVOT_CHART_FONT_FAMILIES.map((f) => (
   <Option value={f.value} key={f.value}>
@@ -44,5 +44,13 @@ export const chartMapinfoOptions = CHART_MAPINFO.map((p) => (
 ))
 
 export const chartSymbolTypeOptions = CHART_LINES_SYMBOL_TYPE.map((p) => (
+  <Option key={p.value} value={p.value}>{p.name}</Option>
+))
+
+export const charSeasThemeOptions = SEAS_THEME.map((p) => (
+  <Option key={p.value} value={p.value}>{p.name}</Option>
+))
+
+export const chartSeasSpeedTypeOptions = SEAS_SPEED_TYPE.map((p) => (
   <Option key={p.value} value={p.value}>{p.name}</Option>
 ))

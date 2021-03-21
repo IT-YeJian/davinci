@@ -170,6 +170,20 @@ export const CHART_BMAP_THEMETYPE = [
     { name: '午夜蓝', value: 'midnightBlue' }
 ]
 
+export const SEAS_THEME = [
+    { name: '背景1', value: 'bg_jd' },
+    { name: '背景2', value: 'bg_kt' },
+    { name: '背景3', value: 'bg_zs' }
+]
+
+export const SEAS_SPEED_TYPE = [
+    { name: '快2档', value: '0.25' },
+    { name: '快1档', value: '0.5' },
+    { name: '正常', value: '1' },
+    { name: '慢1档', value: '2' },
+    { name: '慢2档', value: '3' }
+]
+
 export const CHART_MAPINFO = [
     { name: '中国', value: '0' },
     { name: '北京', value: '11' },

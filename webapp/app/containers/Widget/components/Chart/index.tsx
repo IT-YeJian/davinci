@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { IWidgetProps } from '../Widget'
 import Table from './Table'
+import Seas from './Seas'
 import Scorecard from './Scorecard'
 import Iframe from './Iframe'
 import RichText from './RichText'
@@ -24,6 +25,10 @@ export class CombinedChart extends Component<IChartProps, {}> {
       case ChartTypes.Table:
         return (
           <Table {...this.props}/>
+        )
+      case ChartTypes.Seas:
+        return (
+          <Seas {...this.props}/>
         )
       case ChartTypes.Scorecard:
         return (
