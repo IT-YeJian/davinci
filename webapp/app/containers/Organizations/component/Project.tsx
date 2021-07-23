@@ -30,6 +30,7 @@ import Avatar from 'components/Avatar'
 const utilStyles = require('assets/less/util.less')
 import ProjectRole from './ProjectRole'
 import ProjectAdmin from './ProjectAdmin'
+import ProjectWatermark from './ProjectWatermark'
 
 interface IProjectsFormProps {
   type: string
@@ -160,6 +161,8 @@ export class ProjectsForm extends React.PureComponent<IProjectsFormProps & FormC
       mode = <ProjectRole/>
     } else if (this.state.mode === 'admin') {
       mode = <ProjectAdmin/>
+    } else if (this.state.mode === 'watermark') {
+        mode = <ProjectWatermark onSaved={this.props.onCancel}/>
     } else {
       const { currentProject: {name, id, description, visibility, createBy}} = this.props
       const currentState = this.props.form.getFieldsValue()
@@ -286,6 +289,10 @@ export class ProjectsForm extends React.PureComponent<IProjectsFormProps & FormC
             <Menu.Item key="admin">
               <Icon type="user" />
               管理员设置
+            </Menu.Item>
+            <Menu.Item key="watermark">
+              <Icon type="setting" />
+              水印设置
             </Menu.Item>
           </Menu>
           </div>

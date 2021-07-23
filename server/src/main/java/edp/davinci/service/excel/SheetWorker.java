@@ -20,8 +20,11 @@
 package edp.davinci.service.excel;
 
 import com.google.common.base.Stopwatch;
+<<<<<<< HEAD
 import com.google.common.collect.Maps;
 import edp.core.enums.DataTypeEnum;
+=======
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
 import edp.core.model.QueryColumn;
 import edp.core.utils.CollectionUtils;
 import edp.core.utils.MD5Util;
@@ -93,6 +96,7 @@ public class SheetWorker<T> extends AbstractSheetWriter implements Callable {
             }
 
             final AtomicInteger count = new AtomicInteger(0);
+<<<<<<< HEAD
             template.query(sql, rs -> {
 
                 interrupted(context);
@@ -107,6 +111,38 @@ public class SheetWorker<T> extends AbstractSheetWriter implements Callable {
 
             if (log) {
                 logger.info("Task({}) sheet worker(name:{}, sheetNo:{}, sheetName:{}) query finish md5:{}, count:{}",
+=======
+//            template.query(sql, rs -> {
+//                Map<String, Object> dataMap = Maps.newHashMap();
+//                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+//                    dataMap.put(SqlUtils.getColumnLabel(queryFromsAndJoins, rs.getMetaData().getColumnLabel(i)), rs.getObject(rs.getMetaData().getColumnLabel(i)));
+//                }
+//                writeLine(context, dataMap);
+//                count.incrementAndGet();
+//            });
+
+            List<Map<String, Object>> list = template.queryForList(sql);
+            // 获取合并列
+            List<Integer> listIt = new ArrayList<Integer>();
+            for (int j = 0; j < context.getQueryColumns().size(); j++) {
+                QueryColumn queryColumn = context.getQueryColumns().get(j);
+                if(!queryColumn.getType().equals("value")){
+                    listIt.add(j);
+                }
+            }
+            int[] mergeIndex = new int[listIt.size()];
+            int i = 0;
+            for(Integer it: listIt){
+                mergeIndex[i++] = it.intValue();
+            }
+
+            Map<String, List<Map<String, Object>>> map = new HashMap();
+            map.put("合并单元格数据", list);
+            createSheet(context.getSheet(),context.getQueryColumns(),map,mergeIndex);
+
+            if (context.getCustomLogger() != null) {
+                context.getCustomLogger().info("Task({}) sheet  worker(name:{}, sheetNo: {}, sheetName:{}) finish query md5:{}, count:{}",
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
                         context.getTaskKey(), context.getName(), context.getSheetNo(), context.getSheet().getSheetName(), md5, count.get());
             }
 
