@@ -19,6 +19,7 @@
 
 package edp.davinci.dto.shareDto;
 
+import edp.davinci.dto.projectDto.ProjectInfoShare;
 import edp.davinci.model.MemDashboardWidget;
 import lombok.Data;
 
@@ -37,5 +38,9 @@ public class ShareDashboard {
 
     private List<MemDashboardWidget> relations;
 
+<<<<<<< HEAD
     private Set<ShareView> views;
+=======
+    private ProjectInfoShare project;
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
 }

@@ -36,6 +36,8 @@ import edp.davinci.core.utils.VizUtils;
 import edp.davinci.dao.*;
 import edp.davinci.dto.displayDto.MemDisplaySlideWidgetWithSlide;
 import edp.davinci.dto.projectDto.ProjectDetail;
+import edp.davinci.dto.projectDto.ProjectInfo;
+import edp.davinci.dto.projectDto.ProjectInfoShare;
 import edp.davinci.dto.projectDto.ProjectPermission;
 import edp.davinci.dto.shareDto.*;
 import edp.davinci.dto.userDto.UserLogin;
@@ -247,11 +249,24 @@ public class ShareServiceImpl implements ShareService {
         ShareFactor viewFactor = new ShareFactor();
         BeanUtils.copyProperties(shareFactor, viewFactor);
 
+<<<<<<< HEAD
         Dashboard dashboard = (Dashboard) shareFactor.getShareEntity();
         ShareDashboard shareDashboard = new ShareDashboard();
         BeanUtils.copyProperties(dashboard, shareDashboard);
 
         List<MemDashboardWidget> memDashboardWidgets = memDashboardWidgetMapper.getByDashboardId(dashboard.getId());
+=======
+        ProjectInfo projectInfo = projectService.getProjectInfoByDashboardId(dashboard.getId());
+
+        ShareDashboard shareDashboard = new ShareDashboard();
+        BeanUtils.copyProperties(dashboard, shareDashboard);
+
+        ProjectInfoShare projectInfoShare = new ProjectInfoShare();
+        BeanUtils.copyProperties(projectInfo, projectInfoShare);
+        shareDashboard.setProject(projectInfoShare);
+
+        List<MemDashboardWidget> memDashboardWidgets = memDashboardWidgetMapper.getByDashboardId(dashboardId);
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
         shareDashboard.setRelations(memDashboardWidgets);
 
         Set<SimpleShareWidget> simpleShareWidgets = widgetMapper.getShareWidgetsByDashboard(dashboard.getId());

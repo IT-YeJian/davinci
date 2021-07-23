@@ -59,6 +59,7 @@ import { Icon, Tooltip, Popconfirm, Popover, Dropdown, Menu } from 'antd'
 import ModulePermission from 'containers/Account/components/checkModulePermission'
 import ShareDownloadPermission from 'containers/Account/components/checkShareDownloadPermission'
 import { IProject } from 'containers/Projects/types'
+<<<<<<< HEAD
 import {
   IQueryConditions,
   IQueryVariableMap,
@@ -74,6 +75,16 @@ import { OnGetControlOptions } from 'app/components/Control/types'
 import styles from '../Dashboard.less'
 import utilStyles from 'app/assets/less/util.less'
 import EnhancerPanel from 'components/DataDrill/EnhancerPanel'
+=======
+import { IQueryConditions, IQueryVariableMap, SharePanelType } from '../types'
+import { IMapControlOptions, OnGetControlOptions, IDistinctValueReqeustParams, IFilters } from 'app/components/Filters/types'
+import { ICurrentDataInFullScreenProps } from './fullScreenPanel/FullScreenPanel'
+import Watermark from 'components/Watermark'
+const styles = require('../Dashboard.less')
+const utilStyles = require('assets/less/util.less')
+
+export type IGetChartData = (renderType: RenderType, itemId: number, widgetId: number, queryConditions?: any) => void
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
 
 interface IDashboardItemProps {
   itemId: number
@@ -95,6 +106,7 @@ interface IDashboardItemProps {
   renderType: RenderType
   selectedItems: number[]
   currentProject?: IProject
+  projectInfoShare?: IProject
   queryConditions: IQueryConditions
   container?: string
   errorMessage: string
@@ -561,8 +573,12 @@ export class DashboardItem extends React.PureComponent<
       downloadCsvLoading,
       renderType,
       currentProject,
+<<<<<<< HEAD
       queryConditions,
       onLoadData,
+=======
+      projectInfoShare,
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
       onShowEdit,
       onShowDrillEdit,
       onSelectDrillHistory,
@@ -789,6 +805,7 @@ export class DashboardItem extends React.PureComponent<
 
     const { selectedChart, cols, rows, metrics } = widget.config
     const hasDataConfig = !!(cols.length || rows.length || metrics.length)
+
     const empty = (
       <DashboardItemMask.Empty
         loading={loading}
@@ -797,10 +814,24 @@ export class DashboardItem extends React.PureComponent<
         hasDataConfig={hasDataConfig}
       />
     )
+<<<<<<< HEAD
     const widgetName = alias || widget.name
 
     return (
       <div className={gridItemClass} ref={(f) => (this.container = f)}>
+=======
+
+    const watermarkTextArray = []
+    const isProject = currentProject ? currentProject.config.watermark.isProject : projectInfoShare.config.watermark.isProject
+    if (isProject) {
+      watermarkTextArray.push(currentProject ? currentProject.name : projectInfoShare.name)
+    }
+
+
+    return (
+    // <div className={`Watermark-target ${gridItemClass}`} ref={(f) => this.container = f} ></div>
+      <div className={gridItemClass} ref={(f) => this.container = f} >
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
         <div className={styles.header}>
           <div className={styles.title}>
             <h4>{widgetName}</h4>
@@ -875,6 +906,16 @@ export class DashboardItem extends React.PureComponent<
             {dataDrillHistory}
           </div>
         </Dropdown>
+        {/* <Watermark
+            selector={'.Watermark-target'}
+            color={currentProject ? currentProject.config.watermark.color : projectInfoShare.config.watermark.color}
+            textArray={watermarkTextArray}
+            dateFormat={currentProject ? currentProject.config.watermark.dateFormat : projectInfoShare.config.watermark.dateFormat}
+            isProject={currentProject ? currentProject.config.watermark.isProject : projectInfoShare.config.watermark.isProject}
+            isUsername={currentProject ? currentProject.config.watermark.isUsername : projectInfoShare.config.watermark.isUsername}
+            content={currentProject ? currentProject.config.watermark.content : projectInfoShare.config.watermark.content}
+            enable={currentProject ? currentProject.config.watermark.enable : projectInfoShare.config.watermark.enable}
+        /> */}
       </div>
     )
   }

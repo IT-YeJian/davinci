@@ -33,13 +33,28 @@ import {
 import { IDoubleYAxisConfig } from '../Workbench/ConfigSections/DoubleYAxisSection'
 import { IViewModel } from 'containers/View/types'
 import { IQueryVariableMap } from 'containers/Dashboard/types'
+<<<<<<< HEAD
 import { IControl } from 'app/components/Control/types'
 import { RichTextNode } from 'app/components/RichText'
 import { IReference } from '../Workbench/Reference/types'
 import { ControlQueryMode } from 'app/components/Control/constants'
 import { ViewModelTypes } from 'containers/View/constants'
 
+=======
+import Watermark from 'components/Watermark'
+import { getStyleConfig } from '../util'
+import ChartTypes from '../../config/chart/ChartTypes'
+import { createStructuredSelector } from 'reselect'
+import { makeSelectCurrentProject } from 'containers/Projects/selectors'
+import { connect } from 'react-redux'
+import { IProject } from 'containers/Projects/types'
+import { ISeasConfig } from '../Workbench/ConfigSections/SeasSection/SeasSection'
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
 const styles = require('../Pivot/Pivot.less')
+
+const mapStateToProps = createStructuredSelector({
+    currentProject: makeSelectCurrentProject()
+})
 
 export type DimetionType = 'row' | 'col'
 export type RenderType =
@@ -103,6 +118,7 @@ export interface IChartStyles {
   gauge?: IGaugeConfig
   iframe?: IframeConfig
   table?: ITableConfig
+  seas?: ISeasConfig
   richText?: IRichTextConfig
   bar?: IBarConfig
   radar?: IRadarConfig
@@ -194,6 +210,7 @@ export interface IWidgetConfig extends IWidgetConfigBase {
 export interface IWidgetWrapperProps extends IWidgetProps {
   loading?: boolean | JSX.Element
   empty?: boolean | JSX.Element
+  currentProject?: IProject
 }
 
 export interface IWidgetWrapperStates {
@@ -252,11 +269,27 @@ export class Widget extends React.Component<
     }
   }
 
+<<<<<<< HEAD
   public render() {
     const { loading, empty, ...rest } = this.props
     const { width, height } = this.state
 
     const widgetProps = { width, height, ...rest }
+=======
+  public render () {
+    const { loading, empty, currentProject } = this.props
+    const { width, height } = this.state
+
+    const widgetProps = { width, height, ...this.props }
+
+    const watermarkTextArray = []
+    const isProject = currentProject ? currentProject.config.watermark.isProject : false
+    if (isProject) {
+      watermarkTextArray.push(currentProject.name)
+    }
+
+    delete widgetProps.loading
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
 
     let widgetContent: JSX.Element
     if (width && height) {
@@ -270,7 +303,21 @@ export class Widget extends React.Component<
     }
 
     return (
-      <div className={styles.wrapper} ref={this.container}>
+      <div className={`Watermark-target ${styles.wrapper}`} ref={this.container}>
+        {
+            currentProject ? (
+                <Watermark
+                    selector={'.Watermark-target'}
+                    color={currentProject.config.watermark.color}
+                    textArray={watermarkTextArray}
+                    dateFormat={currentProject.config.watermark.dateFormat}
+                    isProject={currentProject.config.watermark.isProject}
+                    isUsername={currentProject.config.watermark.isUsername}
+                    content={currentProject.config.watermark.content}
+                    enable={currentProject.config.watermark.enable}
+                />
+            ) : null
+        }
         {widgetContent}
         {loading}
         {empty}
@@ -279,4 +326,4 @@ export class Widget extends React.Component<
   }
 }
 
-export default Widget
+export default connect(mapStateToProps, null)(Widget)

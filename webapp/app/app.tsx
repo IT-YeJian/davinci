@@ -42,6 +42,7 @@ import 'react-grid-layout/css/styles.css'
 import 'libs/react-resizable/css/styles.css'
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css'
 import 'assets/fonts/iconfont.css'
+import 'assets/fonts-new/iconfont.css'
 import 'assets/override/antd.css'
 import 'assets/override/react-grid.css'
 import 'assets/override/datepicker.css'
@@ -75,9 +76,14 @@ import 'echarts/lib/component/dataZoom'
 import 'echarts/lib/component/visualMap'
 import 'echarts/lib/component/geo'
 import 'echarts/lib/component/brush'
+<<<<<<< HEAD
 import 'echarts/lib/component/markLine'
 import 'echarts/lib/component/markArea'
 import 'assets/js/china.js'
+=======
+// import 'echarts-gl/dist/echarts-gl'
+// import 'assets/js/china.js'
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
 
 import { DEFAULT_ECHARTS_THEME } from 'app/globalConstants'
 echarts.registerTheme('default', DEFAULT_ECHARTS_THEME)

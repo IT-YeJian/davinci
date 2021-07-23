@@ -47,6 +47,7 @@ import LocalControlConfig from 'app/components/Control/Config'
 import ReferenceConfigModal from './Reference'
 import ComputedConfigForm from '../ComputedConfigForm'
 import ChartIndicator from './ChartIndicator'
+<<<<<<< HEAD
 import AxisSection from './ConfigSections/AxisSection'
 import SplitLineSection from './ConfigSections/SplitLineSection'
 import PivotSection from './ConfigSections/PivotSection'
@@ -59,6 +60,21 @@ import DoubleYAxisSection from './ConfigSections/DoubleYAxisSection'
 import AreaSelectSection from './ConfigSections/AreaSelectSection'
 import ScorecardSection from './ConfigSections/ScorecardSection'
 import IframeSection from './ConfigSections/IframeSection'
+=======
+import AxisSection, { IAxisConfig } from './ConfigSections/AxisSection'
+import SplitLineSection, { ISplitLineConfig } from './ConfigSections/SplitLineSection'
+import PivotSection, { IPivotConfig } from './ConfigSections/PivotSection'
+import SpecSection, { ISpecConfig } from './ConfigSections/SpecSection'
+import LabelSection, { ILabelConfig } from './ConfigSections/LabelSection'
+import LegendSection, { ILegendConfig } from './ConfigSections/LegendSection'
+import VisualMapSection, { IVisualMapConfig } from './ConfigSections/VisualMapSection'
+import ToolboxSection, { IToolboxConfig } from './ConfigSections/ToolboxSection'
+import DoubleYAxisSection, { IDoubleYAxisConfig } from './ConfigSections/DoubleYAxisSection'
+import AreaSelectSection, { IAreaSelectConfig } from './ConfigSections/AreaSelectSection'
+import ScorecardSection, { IScorecardConfig } from './ConfigSections/ScorecardSection'
+import IframeSection, { IframeConfig } from './ConfigSections/IframeSection'
+import SeasSection, { ISeasConfig } from './ConfigSections/SeasSection/SeasSection'
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
 import TableSection from './ConfigSections/TableSection'
 import GaugeSection from './ConfigSections/GaugeSection'
 import BarSection from './ConfigSections/BarSection'
@@ -533,10 +549,19 @@ export class OperatingPanel extends React.Component<
         return `icon-calendar ${styles.iconDate}`
       case ViewModelVisualTypes.GeoCountry:
       case ViewModelVisualTypes.GeoProvince:
+<<<<<<< HEAD
       case ViewModelVisualTypes.GeoCity:
         return 'icon-map'
       default:
         return 'icon-categories'
+=======
+      case ViewModelVisualTypes.GeoCity: return 'icon-map'
+      case ViewModelVisualTypes.GeoArea: return 'icon-map'
+      case ViewModelVisualTypes.GeoStreet: return 'icon-map'
+      case ViewModelVisualTypes.Longitude: return 'icon-jingdu'
+      case ViewModelVisualTypes.Dimension: return 'icon-weidu'
+      default: return 'icon-categories'
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
     }
   }
 
@@ -1931,6 +1956,7 @@ export class OperatingPanel extends React.Component<
     const { metrics } = dataParams
     const [dimetionsCount, metricsCount] = this.getDimetionsAndMetricsCount()
     const {
+<<<<<<< HEAD
       spec,
       xAxis,
       yAxis,
@@ -1951,6 +1977,11 @@ export class OperatingPanel extends React.Component<
       doubleYAxis
     } = styleParams
 
+=======
+      spec, xAxis, yAxis, axis, splitLine, pivot: pivotConfig, label, legend,
+      visualMap, toolbox, areaSelect, scorecard, gauge, iframe, table, seas, bar, radar, doubleYAxis } = styleParams
+    
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
     let categoryDragItems = this.state.categoryDragItems
     if (
       mode === 'pivot' &&
@@ -2079,6 +2110,7 @@ export class OperatingPanel extends React.Component<
       case 'style':
         tabPane = (
           <div className={styles.paramsPane}>
+<<<<<<< HEAD
             {spec && (
               <SpecSection
                 name={chartModeSelectedChart.name}
@@ -2210,6 +2242,111 @@ export class OperatingPanel extends React.Component<
                 onChange={this.styleChange('pivot')}
               />
             )}
+=======
+            {spec && <SpecSection
+              name={chartModeSelectedChart.name}
+              title={chartModeSelectedChart.title}
+              config={spec}
+              onChange={this.styleChange2}
+              isLegendSection={mapLegendLayerType}
+            />}
+            {bar && <BarSection
+              onChange={this.styleChange('bar')}
+              config={bar}
+              dataParams={dataParams}
+            />}
+            {radar && <RadarSection config={radar} onChange={this.styleChange2} />}
+            { mapLabelLayerType
+                ? label && <LabelSection
+                  title="标签"
+                  config={label}
+                  onChange={this.styleChange('label')}
+                  name={chartModeSelectedChart.name}
+                />
+                : null
+            }
+            { mapLegendLayerType
+                ? legend && <LegendSection
+                  title="图例"
+                  config={legend}
+                  onChange={this.styleChange('legend')}
+                />
+                : null
+            }
+            { mapLegendLayerType
+                ? null
+                : visualMap && <VisualMapSection
+                  title="视觉映射"
+                  config={visualMap}
+                  onChange={this.styleChange('visualMap')}
+                />
+            }
+            {toolbox && <ToolboxSection
+              title="工具"
+              config={toolbox}
+              onChange={this.styleChange('toolbox')}
+            />}
+            {doubleYAxis && <DoubleYAxisSection
+              title="双Y轴"
+              config={doubleYAxis}
+              onChange={this.styleChange('doubleYAxis')}
+            />}
+            {xAxis && <AxisSection
+              title="X轴"
+              config={xAxis}
+              onChange={this.styleChange('xAxis')}
+            />}
+            {yAxis && <AxisSection
+              title="Y轴"
+              config={yAxis}
+              onChange={this.styleChange('yAxis')}
+            />}
+            {axis && <AxisSection
+              title="轴"
+              config={axis}
+              onChange={this.styleChange('axis')}
+            />}
+            {splitLine && <SplitLineSection
+              title="分隔线"
+              config={splitLine}
+              onChange={this.styleChange('splitLine')}
+            />}
+            {areaSelect && <AreaSelectSection
+              title="坐标轴框选"
+              config={areaSelect}
+              onChange={this.styleChange('areaSelect')}
+            />}
+            {scorecard && <ScorecardSection
+              title="翻牌器"
+              config={scorecard}
+              onChange={this.styleChange('scorecard')}
+            />}
+            {gauge && <GaugeSection
+              title="仪表盘"
+              config={gauge}
+              onChange={this.styleChange('gauge')}
+            />}
+            {iframe && <IframeSection
+              title="内嵌网页"
+              config={iframe}
+              onChange={this.styleChange('iframe')}
+            />}
+            {seas && <SeasSection
+              title="海洋"
+              config={seas}
+              onChange={this.styleChange('seas')}
+            />}
+            {table && <TableSection
+              dataParams={dataParams}
+              config={table}
+              onChange={this.styleChange('table')}
+            />}
+            {pivotConfig && <PivotSection
+              title="透视表"
+              config={pivotConfig}
+              onChange={this.styleChange('pivot')}
+            />}
+>>>>>>> 7958af50c93c4e3a7d841b0169fec6aba1af2411
           </div>
         )
         break
